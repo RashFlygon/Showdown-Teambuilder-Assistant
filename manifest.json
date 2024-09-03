@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "Pokemon Showdown Custom Teambuilder",
+    "version": "1.0",
+    "permissions": ["activeTab", "scripting"],
+    "host_permissions": ["*://play.pokemonshowdown.com/*"],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://play.pokemonshowdown.com/*"],
+            "js": ["contentScript.js"]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": ["injectedScript.js", "simpleTeambuilder.js", "pokemonManager.js", "SpeedTierManager.js"],
+            "matches": ["*://play.pokemonshowdown.com/*"]
+        }
+    ]
+}
