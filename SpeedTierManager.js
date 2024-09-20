@@ -9,7 +9,8 @@ export default class SpeedTierManager {
     addPokemon(pokemon, teamType = 'user') {
         const speedList = teamType === 'enemy' ? this.enemySpeedList : this.userSpeedList;
 
-        speedList.push({ name: pokemon.name, speed: pokemon.baseStats.spe, sprite: this.getSprite(pokemon) });
+        // Add the Pokémon to the speed list and include the sprite style
+        speedList.push({ name: pokemon.name, speed: pokemon.baseStats.spe, spriteStyle: this.getPokemonIconStyle(pokemon) });
         this.renderSpeedList();
     }
 
@@ -33,29 +34,31 @@ export default class SpeedTierManager {
         this.userSpeedList.sort((a, b) => b.speed - a.speed);
         this.enemySpeedList.sort((a, b) => b.speed - a.speed);
 
+        // Render the user speed list
         this.userSpeedList.forEach(pokemon => {
             userSpeedListEl.append(`
                 <div class="speed-entry">
-                    <img src="${pokemon.sprite}" alt="${pokemon.name}" class="speed-sprite">
+                    <div class="speed-sprite" style="${pokemon.spriteStyle}"></div>
                     <span class="speed-value">${pokemon.speed}</span>
                 </div>
             `);
         });
 
+        // Render the enemy speed list
         this.enemySpeedList.forEach(pokemon => {
             enemySpeedListEl.append(`
                 <div class="speed-entry">
                     <span class="speed-value">${pokemon.speed}</span>
-                    <img src="${pokemon.sprite}" alt="${pokemon.name}" class="speed-sprite">
+                    <div class="speed-sprite" style="${pokemon.spriteStyle}"></div>
                 </div>
             `);
         });
     }
 
-    getSprite(pokemon) {
-        // Return the URL for the Pokémon's sprite
-        const spriteDir = `https://play.pokemonshowdown.com/sprites/dex`;
-        return `${spriteDir}/${toID(pokemon.id)}.png`;
+    // Replace the getSprite method with getPokemonIconStyle
+    getPokemonIconStyle(pokemon) {
+        const iconStyle = Dex.getPokemonIcon(pokemon);  // Fetch the background position from Dex
+        return `background: ${iconStyle.substr(11)}; width: 40px; height: 30px;`;  // Adjust the width and height if needed
     }
 
     injectCSS() {
@@ -67,20 +70,21 @@ export default class SpeedTierManager {
             }
 
             .speed-sprite {
-                width: 24px;
-                height: auto;
+                width: 40px;  /* Updated sprite width */
+                height: 30px; /* Updated sprite height */
                 margin-right: 5px;
+                background-size: 800px 2400px;  /* Match the sprite sheet size */
             }
 
             #userSpeedList {
-                background-color: #66B2FF; /* Blue background for the user team */
+                background-color: #264653; /* Blue background for the user team */
                 padding: 10px;
                 margin-right: 10px;
                 border-radius: 5px;
             }
 
             #enemySpeedList {
-                background-color: #CC3333; /* Red background for the enemy team */
+                background-color: #8B0000; /* Red background for the enemy team */
                 padding: 10px;
                 border-radius: 5px;
             }

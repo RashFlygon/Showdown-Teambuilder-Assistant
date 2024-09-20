@@ -15,7 +15,13 @@
     ],
     "web_accessible_resources": [
         {
-            "resources": ["injectedScript.js", "simpleTeambuilder.js", "pokemonManager.js", "SpeedTierManager.js"],
+            "resources": [
+                "injectedScript.js", 
+                "simpleTeambuilder.js", 
+                "pokemonManager.js", 
+                "SpeedTierManager.js", 
+                "pokemonMoveCategories.js"
+            ],
             "matches": ["*://play.pokemonshowdown.com/*"]
         }
     ]
