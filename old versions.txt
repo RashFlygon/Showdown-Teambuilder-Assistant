@@ -1,7 +1,0 @@
-I am making an chrome extension for the pokemon showdown website. Shortly i will send you all the code I have made for it, please wait until I say I am finished before you start writing any code or helping
-
-
-v4: working speed tier comparison + type charts w/ ability immunities
-v5: imports from teambuilder
-v6: move categories added ** 
-v7: completely working move categories
