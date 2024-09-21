@@ -1,33 +1,33 @@
 {
   "manifest_version": 3,
-  "name": "Pokemon Showdown Team Preparation Assistant",
+  "name": "PrepDex",
   "version": "1.0.9",
   "permissions": ["activeTab", "scripting"],
   "host_permissions": ["*://play.pokemonshowdown.com/*"],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "scripts/background.js"
   },
   "content_scripts": [
     {
       "matches": ["*://play.pokemonshowdown.com/*"],
-      "js": ["contentScript.js"]
+      "js": ["scripts/contentScript.js"]
     }
   ],
-
+  
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
-    "48": "icons/icon32.png",
+    "48": "icons/icon32.png",  // Ensure 48px icon exists
     "128": "icons/icon128.png"
   },
   "web_accessible_resources": [
     {
       "resources": [
-        "injectedScript.js",
-        "simpleTeambuilder.js",
-        "pokemonManager.js",
-        "SpeedTierManager.js",
-        "pokemonMoveCategories.js"
+        "scripts/injectedScript.js",
+        "js/simpleTeambuilder.js",
+        "js/pokemonManager.js",
+        "js/SpeedTierManager.js",
+        "js/pokemonMoveCategories.js"
       ],
       "matches": ["*://play.pokemonshowdown.com/*"]
     }
