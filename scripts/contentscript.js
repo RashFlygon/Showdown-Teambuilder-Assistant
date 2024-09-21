@@ -15,4 +15,4 @@ function injectScriptAsModule(file) {
 }
 
 // Inject the custom script as a module
-injectScriptAsModule('scripts/injectedScript.js');
+injectScriptAsModule('./injectedScript.js');

@@ -1,6 +1,6 @@
-import PokemonManager from 'js/pokemonManager.js';
-import SpeedTierManager from 'js/SpeedTierManager.js';
-import PokemonMoveCategories from 'js/pokemonMoveCategories.js';
+import PokemonManager from './pokemonManager.js';
+import SpeedTierManager from './SpeedTierManager.js';
+import PokemonMoveCategories from './pokemonMoveCategories.js';
 
 
 export default class SimpleTeambuilder {

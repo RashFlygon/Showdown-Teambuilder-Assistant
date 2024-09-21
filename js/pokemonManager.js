@@ -1,4 +1,4 @@
-import PokemonMoveCategories from 'js/pokemonMoveCategories.js'; // Add this import
+import PokemonMoveCategories from './pokemonMoveCategories.js'; // Add this import
 
 export default class PokemonManager {
     constructor(room, speedTierManager) {

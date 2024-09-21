@@ -1,4 +1,4 @@
-import SimpleTeambuilder from 'js/simpleTeambuilder.js';
+import SimpleTeambuilder from '../js/simpleTeambuilder.js';
 
 function createHtmlRoom(id, title, options = {}) {
     if (typeof app?._addRoom !== 'function') {
