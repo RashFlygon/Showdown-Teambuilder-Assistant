@@ -21,6 +21,16 @@ export default class SimpleTeambuilder {
             'Bug', 'Rock', 'Ghost', 'Dragon', 'Dark', 'Steel', 'Fairy'
         ];
     }
+	// Add a simple function to log a Pokémon using the Dex API
+	logPokemonData() {
+		if (window.pkmn && window.pkmn.Dex) {
+			const charizard = window.pkmn.Dex.species.get('Charizard');
+			console.log("Charizard data from Dex API: ", charizard);
+		} else {
+			console.error("Dex API is not available.");
+		}
+	}
+
 
     initializeTypeChart() {
         let typeChart = {};
@@ -46,6 +56,7 @@ export default class SimpleTeambuilder {
         this.bindEvents();  // Bind necessary events
         this.injectCSS(); // Inject CSS for styling
         this.populateTeamDropdown(); // Populate the dropdown with user's teams
+		this.logPokemonData();
     }
 
 	render() {
