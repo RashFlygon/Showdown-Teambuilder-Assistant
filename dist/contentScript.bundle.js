@@ -1,0 +1,1 @@
+!function(e){const n=document.createElement("script");n.type="module",n.src=chrome.runtime.getURL(e),n.onload=function(){console.log(`${e} has been injected successfully.`),this.remove()},n.onerror=function(){console.error(`Failed to inject script: ${e}`)},(document.head||document.documentElement).appendChild(n)}("scripts/injectedScript.js");

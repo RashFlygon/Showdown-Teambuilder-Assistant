@@ -1,32 +1,32 @@
-function injectScriptAsModule(file) {
-    const script = document.createElement('script');
-    script.type = 'module';
-    script.src = chrome.runtime.getURL(file);
-    
-    script.onload = function() {
-        console.log(`${file} has been injected successfully.`);
-        this.remove(); // Clean up after script runs
-    };
-    
-    script.onerror = function() {
-        console.error(`Failed to inject script: ${file}`);
-    };
-    
-    (document.head || document.documentElement).appendChild(script);
-}
+(() => {
+  const SCRIPT_ID = 'prepdex-injected-module';
+  if (document.getElementById(SCRIPT_ID)) return;
 
+  const script = document.createElement('script');
+  script.id = SCRIPT_ID;
+  script.type = 'module';
+  script.src = chrome.runtime.getURL('scripts/injectedScript.js');
+  script.onload = function () { this.remove(); };
+  script.onerror = function () {
+    console.error('PrepDex: failed to inject scripts/injectedScript.js');
+  };
 
+  (document.head || document.documentElement).appendChild(script);
 
-
-// Inject the custom script as a module
-injectScriptAsModule('scripts/injectedScript.js');
-
-const script = document.createElement('script');
-script.src = 'https://unpkg.com/@pkmn/dex';  // Load Dex from unpkg
-script.onload = () => {
-    console.log('Dex loaded successfully');
-    console.log(pkmn.Dex.species.get('Pikachu'));  // Example: Log Pikachu's data
-};
-script.onerror = () => console.error('Failed to load Dex');
-(document.head || document.documentElement).appendChild(script);
-
+  chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+    if (message?.type === 'PREPDEX_OPEN') {
+      window.dispatchEvent(new CustomEvent('prepdex:open'));
+      sendResponse({ ok: true });
+      return;
+    }
+    if (message?.type === 'PREPDEX_CLEAR') {
+      window.dispatchEvent(new CustomEvent('prepdex:clear'));
+      sendResponse({ ok: true });
+      return;
+    }
+    if (message?.type === 'PREPDEX_PLANNER_CLEAR') {
+      window.dispatchEvent(new CustomEvent('prepdex:planner-clear'));
+      sendResponse({ ok: true });
+    }
+  });
+})();

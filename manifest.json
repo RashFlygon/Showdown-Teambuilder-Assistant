@@ -1,34 +1,36 @@
 {
   "manifest_version": 3,
   "name": "PrepDex",
-  "version": "1.0.9",
-  "permissions": ["activeTab", "scripting"],
-  "host_permissions": ["*://play.pokemonshowdown.com/*"],
-  "background": {
-    "service_worker": "scripts/background.js"
+  "version": "0.3.0",
+  "description": "PrepDex room for Pokémon Showdown.",
+  "permissions": ["tabs"],
+  "action": {
+    "default_title": "PrepDex",
+    "default_popup": "popup/popup.html"
   },
+  "host_permissions": ["*://play.pokemonshowdown.com/*"],
   "content_scripts": [
     {
       "matches": ["*://play.pokemonshowdown.com/*"],
-      "js": ["scripts/contentScript.js"]
+      "js": ["scripts/contentScript.js"],
+      "run_at": "document_idle"
     }
   ],
-  "icons": {
-    "16": "icons/icon16.png",
-    "32": "icons/icon32.png",
-    "48": "icons/icon32.png",
-    "128": "icons/icon128.png"
-  },
   "web_accessible_resources": [
     {
       "resources": [
         "scripts/injectedScript.js",
         "js/simpleTeambuilder.js",
-        "js/pokemonManager.js",
-        "js/SpeedTierManager.js",
-        "js/pokemonMoveCategories.js"
+        "js/draftPlanner.js",
+        "icons/spr_bw_518_scaled_2x_pngcrushed.png"
       ],
       "matches": ["*://play.pokemonshowdown.com/*"]
     }
-  ]
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
 }
